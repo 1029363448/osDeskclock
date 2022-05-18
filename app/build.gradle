@@ -1,0 +1,92 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        applicationId "com.android.deskclock"
+        minSdkVersion 24
+        targetSdkVersion 26
+        versionCode VERSION_CODE.toInteger()
+        versionName VERSION_NAME
+    }
+
+    signingConfigs {
+        release {
+            def filePrivateProperties = file("./private.properties")
+            if (filePrivateProperties.exists()) {
+                Properties propsPrivate = new Properties()
+                propsPrivate.load(new FileInputStream(filePrivateProperties))
+
+                storeFile file(propsPrivate['key.store'])
+                keyAlias propsPrivate['key.alias']
+                storePassword propsPrivate['key.store.password']
+                keyPassword propsPrivate['key.alias.password']
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res_ape']
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+        disable 'MissingTranslation'
+    }
+
+    buildTypes {
+        debug {
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            signingConfig signingConfigs.release
+        }
+        release {
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true//混淆
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    //third-party library
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    //local
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    //android public
+    compile 'com.android.support:cardview-v7:26.0.2'
+    //compile 'com.android.support:support-v4:26.0.2'
+    compile 'com.android.support:support-v13:26.0.2'
+    compile 'com.android.support:appcompat-v7:26.0.2'
+    compile 'com.android.support:design:26.0.2'
+    compile 'com.android.support:gridlayout-v7:26.0.2'
+    compile 'com.android.support:recyclerview-v7:26.0.2'
+    compile 'com.android.support:preference-v7:26.0.2'
+    compile 'com.android.support:preference-v14:26.0.2'
+    compile 'com.android.support:percent:26.0.2'//android.support.percent.PercentFrameLayout
+
+    /*compile 'com.android.support:appcompat-v7:26.1.1'*/
+    /*compile 'com.android.support:support-v13:26.1.1'*/
+    /*compile 'com.android.support:gridlayout-v7:26.1.1'*/
+    /*compile 'com.android.support:design:26.1.1'*/
+    //local maven
+    //compile 'com.myos.staticlibs:crashReport:1.0.06@aar'
+    //compile 'com.common.upgrade:appupgrade-v6.0:0.0.14@aar'
+    compile 'com.myos.staticlibs:android-opt-datetimepicker-v7.0:0.0.1@aar'
+    compile 'com.myos.staticlibs:myosutils-v1.0:0.0.18'
+    //add by shanhaiyong tinnotimepicker
+    provided 'com.sugarui.libs:widget-v6.0:0.0.6'
+    /*compile 'com.sugarui.libs:theme-v6.0:0.0.7@aar'*/
+    /*compile 'net.qiujuer.genius:blur:2.0.0-beta4'*/
+    compile 'com.myos.staticlibs:myosutils-v1.0:0.0.18'
+    //auto update
+}
