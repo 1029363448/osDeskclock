@@ -28,7 +28,7 @@
     <original-package android:name="com.android.alarmclock" />
     <original-package android:name="com.android.deskclock" />
 
-    <uses-sdk android:minSdkVersion="19" />
+    <!--<uses-sdk android:minSdkVersion="19" />-->
 
     <!-- M: [ALPS03445474] need to protect these broadcasts to avoid wtf @{ -->
     <protected-broadcast android:name="com.android.deskclock.ALARM_ALERT" />

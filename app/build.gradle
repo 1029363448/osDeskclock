@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.0"
 
     defaultConfig {
         applicationId "com.android.deskclock"
         minSdkVersion 24
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode VERSION_CODE.toInteger()
         versionName VERSION_NAME
     }
@@ -40,16 +40,16 @@ android {
 
     buildTypes {
         debug {
-            shrinkResources true
+           /* shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             minifyEnabled true
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release*/
         }
         release {
-            shrinkResources true
+           /* shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             minifyEnabled true//混淆
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release*/
         }
     }
 }
