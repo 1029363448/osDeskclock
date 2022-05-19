@@ -46,10 +46,10 @@ android {
             signingConfig signingConfigs.release*/
         }
         release {
-           /* shrinkResources true
+           shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             minifyEnabled true//混淆
-            signingConfig signingConfigs.release*/
+            signingConfig signingConfigs.release
         }
     }
 }
